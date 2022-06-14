@@ -11,9 +11,14 @@ import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JTabbedPane;
@@ -29,11 +34,11 @@ import javax.swing.JTextArea;
 public class Home extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	public JTextField titulo;
+	private JTextField objetivo;
+	private JTextField endereco;
+	private JTextField dataInicio;
+	private JTextField status;
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
@@ -41,7 +46,7 @@ public class Home extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -74,57 +79,87 @@ public class Home extends JFrame {
 		tabbedPane.addTab("Cadastrar Projeto", null, panel, null);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(10, 29, 198, 20);
-		panel.add(textField);
-		
-		JLabel titulo = new JLabel("T\u00EDtulo");
-		titulo.setFont(new Font("Tahoma", Font.BOLD, 11));
-		titulo.setBounds(10, 14, 37, 14);
+		titulo = new JTextField();
+		titulo.setColumns(10);
+		titulo.setBounds(10, 29, 198, 20);
 		panel.add(titulo);
+		
+		JLabel labeltitulo = new JLabel("T\u00EDtulo");
+		labeltitulo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		labeltitulo.setBounds(10, 14, 37, 14);
+		panel.add(labeltitulo);
 		
 		JLabel lblNewLabel_1 = new JLabel("Objetivo");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_1.setBounds(221, 14, 54, 14);
 		panel.add(lblNewLabel_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(221, 29, 198, 20);
-		panel.add(textField_1);
+		objetivo = new JTextField();
+		objetivo.setColumns(10);
+		objetivo.setBounds(221, 29, 198, 20);
+		panel.add(objetivo);
 		
 		JLabel lblNewLabel_2 = new JLabel("Endere\u00E7o");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_2.setBounds(10, 60, 56, 14);
 		panel.add(lblNewLabel_2);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(10, 77, 198, 20);
-		panel.add(textField_2);
+		endereco = new JTextField();
+		endereco.setColumns(10);
+		endereco.setBounds(10, 77, 198, 20);
+		panel.add(endereco);
 		
 		JLabel lblNewLabel_3 = new JLabel("Data de Inicio");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_3.setBounds(221, 60, 92, 14);
 		panel.add(lblNewLabel_3);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(221, 76, 92, 20);
-		panel.add(textField_3);
+		dataInicio = new JTextField();
+		dataInicio.setColumns(10);
+		dataInicio.setBounds(221, 76, 92, 20);
+		panel.add(dataInicio);
 		
 		JLabel lblNewLabel_4 = new JLabel("Status");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_4.setBounds(327, 60, 54, 14);
 		panel.add(lblNewLabel_4);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(327, 77, 92, 20);
-		panel.add(textField_4);
+		status = new JTextField();
+		status.setColumns(10);
+		status.setBounds(327, 77, 92, 20);
+		panel.add(status);
 		
 		JButton btnNewButton = new JButton("Cadastrar");
+		btnNewButton.addActionListener(new ActionListener() {
+			ArrayList<String> ProjetoSocial = new ArrayList();
+			public void actionPerformed(ActionEvent e) {
+				titulo.getText();
+				try {
+					BufferedWriter escrever = new BufferedWriter(new FileWriter(titulo.getText()));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				objetivo.getText();
+				endereco.getText();
+				dataInicio.getText();
+				status.getText();
+				ProjetoSocial.add("Titulo do projeto: "+titulo+" \nObjetivo: "+objetivo+" \nEndereço: "+endereco+" \nData de inicio: "+dataInicio+"\nStatus"+status);
+	            Writer escrever = null;
+				try {
+					escrever.append(ProjetoSocial.toString());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	     		 try {
+					escrever.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnNewButton.setBounds(163, 149, 102, 30);
 		panel.add(btnNewButton);
@@ -195,12 +230,12 @@ public class Home extends JFrame {
 	              }
 			}
 		});
-		btnNewButton_1.setBounds(168, 8, 97, 23);
+		btnNewButton_1.setBounds(213, 8, 97, 23);
 		panel_2.add(btnNewButton_1);
 		
 		JLabel lblNewLabel = new JLabel("Selecione o seu arquivo");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel.setBounds(10, 11, 159, 14);
+		lblNewLabel.setBounds(33, 11, 159, 14);
 		panel_2.add(lblNewLabel);
 		
 		
