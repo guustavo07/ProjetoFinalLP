@@ -34,6 +34,8 @@ import javax.swing.JScrollBar;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.DropMode;
+import javax.swing.JRadioButton;
+import javax.swing.JTextPane;
 
 public class Home extends JFrame {
 
@@ -43,9 +45,9 @@ public class Home extends JFrame {
 	private JTextField endereco;
 	private JTextField dataInicio;
 	private JTextField status;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField data;
+	private JTextField hora;
+	private JTextField descricao;
 
 	/**
 	 * Launch the application.
@@ -159,31 +161,80 @@ public class Home extends JFrame {
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel_5 = new JLabel("Data");
-		lblNewLabel_5.setBounds(23, 25, 46, 14);
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_5.setBounds(23, 14, 46, 14);
 		panel_1.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Descri\u00E7\u00E3o");
-		lblNewLabel_6.setBounds(161, 25, 46, 14);
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_6.setBounds(23, 106, 70, 14);
 		panel_1.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Hora");
-		lblNewLabel_7.setBounds(23, 50, 46, 14);
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_7.setBounds(23, 60, 46, 14);
 		panel_1.add(lblNewLabel_7);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(54, 22, 86, 20);
-		panel_1.add(textField_5);
-		textField_5.setColumns(10);
+		data = new JTextField();
+		data.setBounds(23, 29, 86, 20);
+		panel_1.add(data);
+		data.setColumns(10);
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(54, 50, 86, 20);
-		panel_1.add(textField_6);
-		textField_6.setColumns(10);
+		hora = new JTextField();
+		hora.setBounds(23, 75, 86, 20);
+		panel_1.add(hora);
+		hora.setColumns(10);
 		
-		textField_7 = new JTextField();
-		textField_7.setBounds(217, 22, 86, 20);
-		panel_1.add(textField_7);
-		textField_7.setColumns(10);
+		JLabel lblNewLabel_8 = new JLabel("Situa\u00E7\u00E3o");
+		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_8.setBounds(265, 32, 57, 14);
+		panel_1.add(lblNewLabel_8);
+		
+		JRadioButton emExecucao = new JRadioButton("Em Execu\u00E7\u00E3o", false);
+		emExecucao.setBounds(167, 56, 89, 23);
+		panel_1.add(emExecucao);
+		
+		JRadioButton paralisado = new JRadioButton("Paralisado", false);
+		paralisado.setBounds(258, 56, 75, 23);
+		panel_1.add(paralisado);
+		
+		JRadioButton executado = new JRadioButton("Executado", false);
+		executado.setBounds(335, 56, 84, 23);
+		panel_1.add(executado);
+		
+		JButton buttonSalvar = new JButton("Salvar");
+		buttonSalvar.addActionListener(new ActionListener() {
+			String situacao;
+			ArrayList<String> Agendas = new ArrayList();
+			public void actionPerformed(ActionEvent e) {
+				try {
+					BufferedWriter escrever = new BufferedWriter(new FileWriter(titulo.getText(),true));
+					if(emExecucao.isSelected()==true) {
+						situacao="Em Execução";
+					}else if(paralisado.isSelected()==true) {
+						situacao="Paralisado";
+					}else if(executado.isSelected()==true) {
+						situacao="Executado";
+					}
+				Agendas.add("===============AGENDA DO PROJETO=============== \r\nData: "+data.getText()+" \r\nHora: "+hora.getText()+" \r\nDescrição: "+descricao.getText()+" \r\nSituação: "+situacao);
+	            escrever.append(Agendas.toString());
+				escrever.close();
+				}catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				}
+				
+			}
+		);
+		buttonSalvar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		buttonSalvar.setBounds(332, 161, 89, 23);
+		panel_1.add(buttonSalvar);
+		
+		descricao = new JTextField();
+		descricao.setBounds(23, 123, 294, 99);
+		panel_1.add(descricao);
+		descricao.setColumns(10);
+		
 		
 		Panel panel_2 = new Panel();
 		tabbedPane.addTab("Carregar Arquivo", null, panel_2, null);
@@ -213,7 +264,7 @@ public class Home extends JFrame {
 	                    while((str = in.readLine()) != null){
 	                        texto += str;
 	                    }
-	                    textArea.setText(texto);
+	                    textArea.setText("\r\n"+texto);
 	                    in.close();
 	                 } 
 	                 catch (IOException ioe){
@@ -227,7 +278,7 @@ public class Home extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Selecione o seu arquivo");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel.setBounds(33, 11, 159, 14);
+		lblNewLabel.setBounds(10, 11, 159, 14);
 		panel_2.add(lblNewLabel);
 		
 		
