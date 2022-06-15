@@ -30,6 +30,10 @@ import java.awt.List;
 import java.awt.TextArea;
 import java.awt.Button;
 import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.DropMode;
 
 public class Home extends JFrame {
 
@@ -133,33 +137,19 @@ public class Home extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			ArrayList<String> ProjetoSocial = new ArrayList();
 			public void actionPerformed(ActionEvent e) {
-				titulo.getText();
+				
 				try {
-					BufferedWriter escrever = new BufferedWriter(new FileWriter(titulo.getText()));
-				} catch (IOException e1) {
+					BufferedWriter escrever = new BufferedWriter(new FileWriter(titulo.getText(),true));
+				ProjetoSocial.add("Titulo do projeto: "+titulo.getText()+" \r\nObjetivo: "+objetivo.getText()+" \r\nEndereço: "+endereco.getText()+" \r\nData de inicio: "+dataInicio.getText()+" \r\nStatus"+status.getText());
+	            escrever.append(ProjetoSocial.toString());
+				escrever.close();
+				}catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				objetivo.getText();
-				endereco.getText();
-				dataInicio.getText();
-				status.getText();
-				ProjetoSocial.add("Titulo do projeto: "+titulo+" \nObjetivo: "+objetivo+" \nEndereço: "+endereco+" \nData de inicio: "+dataInicio+"\nStatus"+status);
-	            Writer escrever = null;
-				try {
-					escrever.append(ProjetoSocial.toString());
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-	     		 try {
-					escrever.close();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 
 			}
-		});
+		);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnNewButton.setBounds(163, 149, 102, 30);
 		panel.add(btnNewButton);
@@ -173,7 +163,7 @@ public class Home extends JFrame {
 		panel_1.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Descri\u00E7\u00E3o");
-		lblNewLabel_6.setBounds(23, 81, 46, 14);
+		lblNewLabel_6.setBounds(161, 25, 46, 14);
 		panel_1.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Hora");
@@ -191,7 +181,7 @@ public class Home extends JFrame {
 		textField_6.setColumns(10);
 		
 		textField_7 = new JTextField();
-		textField_7.setBounds(75, 78, 86, 20);
+		textField_7.setBounds(217, 22, 86, 20);
 		panel_1.add(textField_7);
 		textField_7.setColumns(10);
 		
@@ -200,7 +190,9 @@ public class Home extends JFrame {
 		panel_2.setLayout(null);
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(33, 42, 367, 166);
+		textArea.setWrapStyleWord(true);
+		textArea.setLineWrap(true);
+		textArea.setBounds(10, 35, 409, 187);
 		panel_2.add(textArea);
 		
 		JButton btnNewButton_1 = new JButton("Pesquisar");
