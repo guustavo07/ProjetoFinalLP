@@ -154,14 +154,11 @@ public class Home extends JFrame {
 		JButton btnNewButton = new JButton("Cadastrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			ArrayList<String> ProjetoSocial = new ArrayList();
-			public void actionPerformed(ActionEvent e) {
-				JTextField tituloAgenda;
-			
+			public void actionPerformed(ActionEvent e) {			
 				if("".equals(titulo.getText()) || "".equals(objetivo.getText()) || "".equals(endereco.getText()) || 
 			            "".equals(dataInicio.getText()) || "".equals(status.getText())){
 			        JOptionPane.showMessageDialog(null,"Preencha todos os campos!","Alert",JOptionPane.WARNING_MESSAGE);     
-				  
-				}				
+				}else				
 				try {
 					BufferedWriter escrever = new BufferedWriter(new FileWriter(titulo.getText(),true));
 				ProjetoSocial.add("Titulo do projeto: "+titulo.getText()+" \r\nObjetivo: "+objetivo.getText()+" \r\nEndereço: "+endereco.getText()+" \r\nData de inicio: "+dataInicio.getText()+" \r\nStatus: "+status.getText());
@@ -235,6 +232,8 @@ public class Home extends JFrame {
 		panelAgenda.add(comboBox);
 		
 		JTextArea descricao = new JTextArea();
+		descricao.setWrapStyleWord(true);
+		descricao.setLineWrap(true);
 		descricao.setBounds(23, 137, 230, 85);
 		panelAgenda.add(descricao);
 
@@ -243,9 +242,9 @@ public class Home extends JFrame {
 		buttonSalvar.addActionListener(new ActionListener() {
 			ArrayList<String> Agendas = new ArrayList();
 			public void actionPerformed(ActionEvent e) {
-				if("".equals(data.getText()) || "".equals(hora.getText()) || "".equals(descricao.getText())){
+				if("".equals(data_1.getText()) || "".equals(hora_1.getText()) || "".equals(descricao.getText())){
 					 JOptionPane.showMessageDialog(null,"Preencha todos os campos!","Alert",JOptionPane.WARNING_MESSAGE);
-				}
+				}else
 				try {
 					BufferedWriter escrever = new BufferedWriter(new FileWriter(titulo.getText(),true));
 				
@@ -261,8 +260,8 @@ public class Home extends JFrame {
 				dataInicio.setText("");
 				status.setText("");
 				comboBox.removeAllItems();
-				data.setText("");
-				hora.setText("");
+				data_1.setText("");
+				hora_1.setText("");
 				descricao.setText("");
 				
 				}catch (IOException e1) {
