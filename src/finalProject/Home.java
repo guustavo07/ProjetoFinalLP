@@ -320,6 +320,7 @@ public class Home extends JFrame {
 				dataInicio_1.setText("");
 				status.setText("");
 				tabbedPane.setSelectedIndex(0);
+				tabbedPane.setEnabledAt(1, false);
 			}
 		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
