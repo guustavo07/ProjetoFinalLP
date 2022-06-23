@@ -1,3 +1,4 @@
+/*Integrantes do grupo: Gustavo, Eugenio, Pedro, Hiann.*/
 package finalProject;
 
 import java.awt.BorderLayout;
@@ -178,7 +179,7 @@ public class Home extends JFrame {
 							   "                                                                                           "+
 									" \n\r===============Objetivo: "+objetivo.getText()+
 							   "                                                                          "+
-									" \n\r===============EndereÁo: "+endereco.getText()+
+									" \n\r===============Endere√ßo: "+endereco.getText()+
 							   "                                                                                "+
 									" \n\r===============Data de inicio: "+dataInicio_1.getText()+
 							   "                                                                                      "+
@@ -275,14 +276,14 @@ public class Home extends JFrame {
 																		"                                                                                                           "+
 																		" \n\r===============Hora: "+hora_1.getText()+
 																		"                                                                                                                     "+
-																		" \n\r===============SituaÁ„o: "+comboBox.getSelectedItem()+
+																		" \n\r===============Situa√ß√£o: "+comboBox.getSelectedItem()+
 																		"                                                                                                       "+
-																		" \n\r===============DescriÁ„o: "+descricao.getText());
+																		" \n\r===============Descri√ß√£o: "+descricao.getText());
 				escrever.append(Agendas.toString().replaceAll("\\[|\\]", "").replaceAll(", ",", "));
 
 				
 				JOptionPane.showMessageDialog(null, "Agenda salva com sucesso!");
-				String option = JOptionPane.showInputDialog("Deseja cadastrar outra agenda? \n1-Sim 2-N„o");
+				String option = JOptionPane.showInputDialog("Deseja cadastrar outra agenda? \n1-Sim 2-N√£o");
 				if(option.equals("1")){
 					comboBox.setSelectedIndex(0);
 					data_1.setText("");
@@ -372,7 +373,7 @@ public class Home extends JFrame {
 	                    in.close();
 	                 } 
 	                 catch (IOException ioe){
-	                    // possiveis erros s„o tratatos aqui
+	                    // possiveis erros s√£o tratatos aqui
 	                 }
 	              }
 			}
